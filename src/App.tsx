@@ -1,55 +1,18 @@
-import Alert from "./components/ui/Alert/Alert";
-import { Ban, Bell, CheckCheck, Info } from "lucide-react";
-function App() {
-  return (
-    <div style={{ margin: "2rem" }}>
-      <Alert
-        type="alert-default"
-        icon={<Bell size={20} />}
-        title={"Something went wrong"}
-      >
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla
-          nostrum perferendis <a href="./">Link</a> necessitatibus pariatur labore perspiciatis eius
-          magnam, sapiente temporibus tempora!
-        </p>
-      </Alert>
+import ProductCard from "./components/ProductCard";
+import { productList } from "./data";
 
-      
-      <Alert
-        type="alert-info"
-        icon={<Info size={20} />}
-        title={"Something went wrong"}
-        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae saepe
-        pariatur voluptate laboriosam soluta architecto obcaecati in asperiores
-        vitae quo?"
-      />
-      <Alert
-        type="alert-warning"
-        icon={<Ban size={20} />}
-        title={"Something went wrong"}
-        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae saepe
-        pariatur voluptate laboriosam soluta architecto obcaecati in asperiores
-        vitae quo?"
-      />
-      <Alert
-        type="alert-error"
-        icon={<Ban size={20} />}
-        title={"Something went wrong"}
-        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae saepe
-        pariatur voluptate laboriosam soluta architecto obcaecati in asperiores
-        vitae quo?"
-      />
-      <Alert
-        type="alert-success"
-        icon={<CheckCheck size={20} />}
-        title={"Something went wrong"}
-        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae saepe
-        pariatur voluptate laboriosam soluta architecto obcaecati in asperiores
-        vitae quo?"
-      />
-    </div>
+const App = () => {
+  // ** Renders
+  const renderProductList = productList.map((product) => (
+    <ProductCard key={product.id} product={product} />
+  ));
+  return (
+    <main className="container px-4 sm:px-8 lg:px-16 xl:px-20 2xl:px-28">
+      <div className="m-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4 p-2 rounded-md">
+        {renderProductList}
+      </div>
+    </main>
   );
-}
+};
 
 export default App;
