@@ -32,10 +32,10 @@ const {imageURL,title,description,category,price} = product
         />
       </div>
       <div className="flex items-center space-x-2 mt-5">
-        <Button type="button" className="bg-indigo-700" >
+        <Button type="button" className="bg-indigo-700 hover:bg-indigo-600" >
           EDIT
         </Button>
-        <Button type="button" className="bg-red-700">
+        <Button type="button" className="bg-red-700 hover:bg-red-600">
           DELETE
         </Button>
       </div>
