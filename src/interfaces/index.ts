@@ -11,9 +11,11 @@ export interface IProduct {
     imageURL: string;
   };
 }
+type ProductNames = "title" | "description" | "imageURL" | "price";
+
 export interface IFormInput {
   id: string;
-  name: string;
+  name: ProductNames;
   label: string;
   type: string;
 }
