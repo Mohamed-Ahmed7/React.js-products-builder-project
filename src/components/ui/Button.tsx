@@ -10,7 +10,7 @@ const Button = ({ className, children, width = "w-full", ...rest }: IProps) => {
   return (
     <button
       {...rest}
-      className={`${className} ${width} text-white rounded-md p-2  cursor-pointer hover:opacity-95`}
+      className={`${className} ${width} text-white rounded-lg p-2  cursor-pointer hover:opacity-95`}
     >
       {children}
     </button>

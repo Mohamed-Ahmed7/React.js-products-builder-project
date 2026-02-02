@@ -1,13 +1,14 @@
 import { useState } from "react";
 import ProductCard from "./components/ProductCard";
 import Modal from "./components/ui/Modal";
-import { productList } from "./data";
+import { formInputsList, productList } from "./data";
 import Button from "./components/ui/Button";
+import Input from "./components/ui/Input";
 
 const App = () => {
-  // ** STATE
+  // ** ----------- STATE ----------
   const [isOpen, setIsOpen] = useState(false);
-  // ** Handler
+  // ** ------------ Handler------------
   function openModal() {
     setIsOpen(true);
   }
@@ -15,9 +16,20 @@ const App = () => {
   function closeModal() {
     setIsOpen(false);
   }
-  // ** Renders
+  // ** ---------------Renders---------------
   const renderProductList = productList.map((product) => (
     <ProductCard key={product.id} product={product} />
+  ));
+  const renderFormInputsList = formInputsList.map((input) => (
+    <div className="flex flex-col" key={input.id}>
+      <label
+        htmlFor={input.id}
+        className="mb-1 text-sm font-medium text-gray-700"
+      >
+        {input.label}
+      </label>
+      <Input type={input.type} id={input.id} name={input.name} />
+    </div>
   ));
   return (
     <main className="container px-4 sm:px-8 lg:px-16 xl:px-20 2xl:px-28">
@@ -28,10 +40,15 @@ const App = () => {
         {renderProductList}
       </div>
       <Modal isOpen={isOpen} closeModal={closeModal} title="Add a New Product">
-        <div className="flex items-center gap-x-3">
-          <Button className="bg-indigo-700 hover:bg-indigo-600">Submit</Button>
-          <Button className="bg-gray-700 hover:bg-gray-600">Cancel</Button>
-        </div>
+        <form className="space-y-3">
+          {renderFormInputsList}
+          <div className="flex items-center gap-x-3">
+            <Button className="bg-indigo-700 hover:bg-indigo-600">
+              Submit
+            </Button>
+            <Button className="bg-gray-700 hover:bg-gray-600">Cancel</Button>
+          </div>
+        </form>
       </Modal>
     </main>
   );
