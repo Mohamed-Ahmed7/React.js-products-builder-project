@@ -9,8 +9,6 @@ interface IProps {
   children: ReactNode;
 }
 const Modal = ({ isOpen, closeModal, title, children }: IProps) => {
-
-
   return (
     <>
       <Dialog
@@ -30,7 +28,11 @@ const Modal = ({ isOpen, closeModal, title, children }: IProps) => {
                   {title}
                 </DialogTitle>
               )}
-              <X size={25}  className="absolute top-7 right-7 text-gray-500 cursor-pointer hover:text-red-500" onClick={closeModal}/>
+              <X
+                size={25}
+                className="absolute top-7 right-7 text-gray-500 cursor-pointer hover:text-red-500"
+                onClick={closeModal}
+              />
               <div className="mt-4">{children}</div>
             </DialogPanel>
           </div>

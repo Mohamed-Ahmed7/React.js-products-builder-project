@@ -1,9 +1,12 @@
-export interface IProduct {
-  id?: string | undefined;
+export interface IProductDetails {
   title: string;
   description: string;
   imageURL: string;
   price: string;
+}
+
+export interface IProduct extends IProductDetails {
+  id?: string | undefined;
   colors: string[];
   category: {
     id: string;
@@ -11,11 +14,10 @@ export interface IProduct {
     imageURL: string;
   };
 }
-type ProductNames = "title" | "description" | "imageURL" | "price";
 
 export interface IFormInput {
   id: string;
-  name: ProductNames;
+  name: keyof IProductDetails;
   label: string;
   type: string;
 }
