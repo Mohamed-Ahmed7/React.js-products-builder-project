@@ -29,7 +29,7 @@ const App = () => {
     imageURL: "",
     price: "",
   });
-  console.log(errors);
+  const [tempColors, setTempColors] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   // ** ------------ Handler------------
   const openModal = (): void => setIsOpen(true);
@@ -66,7 +66,7 @@ const App = () => {
       return;
     }
   };
-  
+
   // ** ---------------Renders---------------
   const renderProductList = productList.map((product) => (
     <ProductCard key={product.id} product={product} />
@@ -89,8 +89,19 @@ const App = () => {
       <ErrorMessage errorMsg={errors[input.name]} />
     </div>
   ));
+  console.log(tempColors);
   const renderProductColors = colors.map((color) => (
-    <CircleColor key={color} color={color} />
+    <CircleColor
+      key={color}
+      color={color}
+      onClick={() => {
+        if (tempColors.includes(color)) {
+          setTempColors(tempColors.filter((item) => item !== color));
+          return;
+        }
+        setTempColors((prev) => [...prev, color]);
+      }}
+    />
   ));
   return (
     <main className="container px-4 sm:px-8 lg:px-16 xl:px-20 2xl:px-28">
@@ -112,6 +123,17 @@ const App = () => {
           {renderFormInputsList}
           <div className="flex items-center flex-wrap my-4 space-x-1">
             {renderProductColors}
+          </div>
+          <div className="flex items-center flex-wrap my-4 space-x-1">
+            {tempColors.map((color) => (
+              <span
+                key={color}
+                className="text-white p-1 rounded-md mr-2 mb-1"
+                style={{ backgroundColor: color }}
+              >
+                {color}
+              </span>
+            ))}
           </div>
           <div className="flex items-center gap-x-3">
             <Button className="bg-indigo-700 hover:bg-indigo-600">
