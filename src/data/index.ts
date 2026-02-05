@@ -1,6 +1,5 @@
 import { v4 as uuid } from "uuid";
 import type { IFormInput, IProduct } from "../interfaces";
-import { productValidation } from "../validation";
 
 export const productList: IProduct[] = [
   {

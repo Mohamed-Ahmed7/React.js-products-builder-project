@@ -8,6 +8,7 @@ import type { IProduct } from "./interfaces";
 import { productValidation } from "./validation";
 import ErrorMessage from "./components/ErrorMessage";
 import CircleColor from "./components/CircleColor";
+import { v4 as uuid } from "uuid";
 const App = () => {
   const defaultProductObj: IProduct = {
     title: "",
@@ -22,6 +23,7 @@ const App = () => {
     },
   };
   // ** ----------- STATE ----------
+  const [products, setProducts] = useState<IProduct[]>(productList);
   const [product, setProduct] = useState<IProduct>(defaultProductObj);
   const [errors, setErrors] = useState({
     title: "",
@@ -65,10 +67,17 @@ const App = () => {
       setErrors(errorsMsg);
       return;
     }
+    setProducts((prev) => [
+      { ...product, id: uuid(), colors: tempColors },
+      ...prev,
+    ]);
+    setProduct(defaultProductObj);
+    setTempColors([]);
+    closeModal();
   };
 
   // ** ---------------Renders---------------
-  const renderProductList = productList.map((product) => (
+  const renderProductList = products.map((product) => (
     <ProductCard key={product.id} product={product} />
   ));
   const renderFormInputsList = formInputsList.map((input) => (
@@ -89,7 +98,7 @@ const App = () => {
       <ErrorMessage errorMsg={errors[input.name]} />
     </div>
   ));
-  console.log(tempColors);
+
   const renderProductColors = colors.map((color) => (
     <CircleColor
       key={color}
