@@ -1,12 +1,13 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import ProductCard from "./components/ProductCard";
 import Modal from "./components/ui/Modal";
-import { formInputsList, productList } from "./data";
+import { colors, formInputsList, productList } from "./data";
 import Button from "./components/ui/Button";
 import Input from "./components/ui/Input";
 import type { IProduct } from "./interfaces";
 import { productValidation } from "./validation";
 import ErrorMessage from "./components/ErrorMessage";
+import CircleColor from "./components/CircleColor";
 const App = () => {
   const defaultProductObj: IProduct = {
     title: "",
@@ -65,6 +66,7 @@ const App = () => {
       return;
     }
   };
+  
   // ** ---------------Renders---------------
   const renderProductList = productList.map((product) => (
     <ProductCard key={product.id} product={product} />
@@ -87,6 +89,9 @@ const App = () => {
       <ErrorMessage errorMsg={errors[input.name]} />
     </div>
   ));
+  const renderProductColors = colors.map((color) => (
+    <CircleColor key={color} color={color} />
+  ));
   return (
     <main className="container px-4 sm:px-8 lg:px-16 xl:px-20 2xl:px-28">
       <div className="flex items-center justify-between p-2 m-5">
@@ -105,6 +110,9 @@ const App = () => {
       <Modal isOpen={isOpen} closeModal={closeModal} title="Add a New Product">
         <form className="space-y-3" onSubmit={submitHandler}>
           {renderFormInputsList}
+          <div className="flex items-center flex-wrap my-4 space-x-1">
+            {renderProductColors}
+          </div>
           <div className="flex items-center gap-x-3">
             <Button className="bg-indigo-700 hover:bg-indigo-600">
               Submit
