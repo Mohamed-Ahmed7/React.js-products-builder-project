@@ -1,4 +1,3 @@
-
 /**
  * Validates a product object to ensure all fields meet the required conditions.
  *

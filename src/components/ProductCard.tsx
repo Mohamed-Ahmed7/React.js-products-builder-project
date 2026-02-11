@@ -1,4 +1,3 @@
-
 import type { IProduct } from "../interfaces";
 import { textSlicer } from "../utils/functions";
 import CircleColor from "./CircleColor";
@@ -6,16 +5,20 @@ import Image from "./Image";
 import Button from "./ui/Button";
 interface IProps {
   product: IProduct;
+  setProductToEdit: (product: IProduct) => void;
+  openEditModal: () => void;
 }
-const ProductCard = ({ product }: IProps) => {
-  const { imageURL, title, description, category, price,colors } = product;
-  // ** Renders 
-   const renderProductColors = colors.map((color) => (
-     <CircleColor
-       key={color}
-       color={color}
-     />
-   ));
+const ProductCard = ({ product, setProductToEdit, openEditModal }: IProps) => {
+  const { imageURL, title, description, category, price, colors } = product;
+  // ** Renders
+  const renderProductColors = colors.map((color) => (
+    <CircleColor key={color} color={color} />
+  ));
+  // ** ---------- Handler --------------- ** //
+  const onEdit = () => {
+    setProductToEdit(product);
+    openEditModal();
+  };
   return (
     <div className="rounded-md p-2 flex flex-col ">
       <Image
@@ -37,7 +40,11 @@ const ProductCard = ({ product }: IProps) => {
         />
       </div>
       <div className="flex items-center space-x-2 mt-5">
-        <Button type="button" className="bg-indigo-700 hover:bg-indigo-600">
+        <Button
+          onClick={onEdit}
+          type="button"
+          className="bg-indigo-700 hover:bg-indigo-600"
+        >
           EDIT
         </Button>
         <Button type="button" className="bg-red-700 hover:bg-red-600">
